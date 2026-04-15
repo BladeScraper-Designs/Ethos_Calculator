@@ -37,7 +37,7 @@ The tool will appear as "Calculator" in the system menu.
 
 - Tap the on-screen keys to build an expression.
 - Tap `=` or long-press `ENTER` to evaluate.
-- Use `DEL` or the radio backspace/delete key to remove the last character.
+- Use `DEL` to remove the last character.
 - Use `AC` to clear the current expression.
 - Use `D/R` to switch trigonometry between degrees and radians.
 - Use `ANS` to insert the previous result into the next expression.
