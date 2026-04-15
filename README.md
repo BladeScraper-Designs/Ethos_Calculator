@@ -115,40 +115,6 @@ parameter (`Volts`, `Amps`, `Ohms`, or `Watts`), enter its value, then tap
 another parameter and enter its value. Entered values appear in the status line below the main
 display as you enter them. Tap `Solve` to calculate the remaining two values.
 
-The same conversions can be typed directly:
-
-```text
-thr_ethos(75)       -> +50
-thr_spektrum(50)   -> 75
-pwm_pct(1500)      -> 0
-pct_pwm(-100)      -> 1000
-in_mm(5)           -> 127
-mm_in(25.4)        -> 1
-oz_g(1)            -> 28.34952
-g_oz(28.349523125) -> 1
-```
-
-Ohm's Law examples:
-
-```text
-12 V and 2 A     -> R = 6 ohm, P = 24 W
-12 V and 6 ohm   -> I = 2 A, P = 24 W
-6 ohm and 24 W   -> V = 12 V, I = 2 A
-```
-
-## Examples
-
-```text
-2pi          -> 2 * pi
-2(3+4)       -> 14
-2sin(30)     -> 1 in degree mode
-sqrt(144)    -> 12
-5!           -> 120
-250%         -> 2.5
-1.2e6        -> 1200000
-ans/2        -> half of the previous answer
-```
-
 ## Other
 
 Graphics by Pixel Perfect
