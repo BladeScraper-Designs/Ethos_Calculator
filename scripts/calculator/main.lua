@@ -2,9 +2,10 @@
 -- A self-contained scientific calculator system tool.
 
 local TOOL_NAME = "Calculator"
-local TOOL_VERSION = "1.0.1"
+local TOOL_VERSION = "1.0.2"
 local MAX_INPUT_LEN = 160
 local MAX_PARSE_DEPTH = 48
+local DISPLAY_SIG_DIGITS = 7
 
 local Math = math
 local PI = (Math and Math.pi) or 3.14159265358979323846
@@ -96,16 +97,11 @@ local function formatNumber(value)
     if value == -HUGE then return "-Inf" end
     if Math.abs(value) < 1e-12 then value = 0 end
 
-    local absValue = Math.abs(value)
-    local text
-    if value ~= 0 and (absValue >= 1e10 or absValue < 1e-6) then
-        text = string.format("%.12g", value)
-    else
-        text = string.format("%.10f", value)
-        text = text:gsub("0+$", ""):gsub("%.$", "")
-    end
+    -- Ethos exposes float noise past roughly seven significant digits on some builds.
+    local text = string.format("%." .. tostring(DISPLAY_SIG_DIGITS) .. "g", value + 0.0)
 
     text = text:gsub("e%+0?", "e"):gsub("e%-0?", "e-")
+    if text == "-0" then text = "0" end
     return text
 end
 
@@ -504,7 +500,9 @@ local function appendText(text)
         errorMessage = nil
     end
 
-    if input == "0" and shouldStartNew(text) and text ~= "." then
+    if input == "0" and text == "-" then
+        input = ""
+    elseif input == "0" and shouldStartNew(text) and text ~= "." then
         input = ""
     end
 
