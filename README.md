@@ -4,6 +4,8 @@ A compact scientific calculator for FrSky Ethos radios and the Ethos simulator.
 It runs as an Ethos System Tool, so it is available directly on the radio when
 you need quick field math, setup checks, or unit calculations.
 
+![Ethos Calculator screenshot](img/calc.png)
+
 ## Highlights
 
 - Standard math with parentheses: `+`, `-`, `*`, `/`, and `^`
