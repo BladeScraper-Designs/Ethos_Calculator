@@ -4,7 +4,7 @@ A compact scientific calculator for FrSky Ethos radios and the Ethos simulator.
 It runs as an Ethos System Tool, so it is available directly on the radio when
 you need quick field math, setup checks, or unit calculations.
 
-![Ethos Calculator screenshot](img/calc.png)
+![Ethos Calculator screenshot](img/calc.bmp)
 
 ## Highlights
 
@@ -18,6 +18,8 @@ you need quick field math, setup checks, or unit calculations.
 - Memory keys: `MS`, `MR`, `M+`, and `MC`
 - Implicit multiplication for natural entries like `2pi`, `2(3+4)`, and
   `2sin(30)`
+- Quick Tools mode from the radio `PAGE` key for throttle conversion, unit
+  conversion, and Ohm's Law
 
 ## Installation
 
@@ -41,8 +43,11 @@ The tool will appear as "Calculator" in the system menu.
 - Use `AC` to clear the current expression.
 - Use `D/R` to switch trigonometry between degrees and radians.
 - Use `ANS` to insert the previous result into the next expression.
+- Press the radio `PAGE` key to switch between the calculator and Quick Tools.
+- Press `RTN` to go back from a Quick Tools entry page to the Quick Tools menu,
+  or from the Quick Tools menu back to the calculator.
 
-The top line shows the current angle mode, the last answer, and memory value
+The top line shows the current mode, `PAGE` hint, last answer, and memory value
 when memory is set.
 
 ## Memory Keys
@@ -53,6 +58,83 @@ when memory is set.
 - `MC` clears memory.
 
 Memory can also be referenced in expressions with `m` or `mem`.
+
+## Quick Tools
+
+Press `PAGE` to switch to Quick Tools, then tap a tool. Each tool opens an entry
+prompt with its own keypad. Enter the source value or values and tap `OK` or
+`Solve`. Tools stay on their entry page for repeated conversions until you tap
+`Cancel` or press `RTN`/`PAGE`. The result replaces the current calculator entry
+and is also stored as `ans` where practical.
+
+![Quick Tools menu screenshot](img/quick-tools.bmp)
+
+Available Quick Tools:
+
+### Throttle Scale Converter
+
+![Throttle Scale Converter screenshot](img/quick-tools-throttle-scale.bmp)
+
+Converts between Spektrum-style `0-100%` throttle values and Ethos/EdgeTX-style
+`+/-100%` throttle values. Use the `Swap` button to flip the direction.
+
+Examples:
+
+```text
+0-100% to +/-100%: 75 -> +50
++/-100% to 0-100%: +50 -> 75
+```
+
+### Unit Converter
+
+![Unit Converter screenshot](img/quick-tools-unit-channel.bmp)
+
+![Unit Converter screenshot](img/quick-tools-unit-length.bmp)
+
+Converts within a selected unit group. Tap the group selector to switch between
+channel, length, weight, and temperature. Tap either unit selector to cycle that
+side through the units in the selected group.  Tapping `Swap` will swap the
+`From` and `To` units.
+
+Unit Converter groups:
+
+- Channel: `PWM us`, `Channel %`
+- Length: `mi`, `yd`, `ft`, `in`, `km`, `m`, `cm`, `mm`
+- Weight: `kg`, `g`, `mg`, `lb`, `oz`
+- Temperature: `degC`, `degF`, `Kelvin`
+
+Channel conversions reject source entries outside `800` to `2200` PWM us or
+outside `-125` to `+125` channel percent.
+
+### Ohm's Law Solver
+
+![Ohm's Law Solver screenshot](img/quick-tools-ohms-law.bmp)
+
+Solves the remaining Ohm's Law values from any two entered values. Tap a
+parameter (`Volts`, `Amps`, `Ohms`, or `Watts`), enter its value, then tap
+another parameter and enter its value. Entered values appear in the status line below the main
+display as you enter them. Tap `Solve` to calculate the remaining two values.
+
+The same conversions can be typed directly:
+
+```text
+thr_ethos(75)       -> +50
+thr_spektrum(50)   -> 75
+pwm_pct(1500)      -> 0
+pct_pwm(-100)      -> 1000
+in_mm(5)           -> 127
+mm_in(25.4)        -> 1
+oz_g(1)            -> 28.34952
+g_oz(28.349523125) -> 1
+```
+
+Ohm's Law examples:
+
+```text
+12 V and 2 A     -> R = 6 ohm, P = 24 W
+12 V and 6 ohm   -> I = 2 A, P = 24 W
+6 ohm and 24 W   -> V = 12 V, I = 2 A
+```
 
 ## Examples
 
@@ -66,30 +148,6 @@ sqrt(144)    -> 12
 1.2e6        -> 1200000
 ans/2        -> half of the previous answer
 ```
-
-## Notes
-
-Input is limited to 160 characters to keep the calculator responsive on the
-radio. Very large results, deeply nested expressions, division by zero, and
-invalid function inputs show an error message instead of locking up the tool.
-
-For very large or very small numbers, use `EE` scientific notation.
-
-## Troubleshooting
-
-If the calculator does not show up, confirm the folder is named `calculator`
-and is placed directly under `scripts`. The final path should include:
-
-```text
-scripts/calculator/main.lua
-```
-
-If the icon is missing but the calculator opens, check that this file was copied:
-
-```text
-scripts/calculator/gfx/icon.png
-```
-
 
 ## Other
 
