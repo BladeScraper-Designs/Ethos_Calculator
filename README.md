@@ -75,7 +75,7 @@ Available Quick Tools:
 
 ![Throttle Scale Converter screenshot](img/quick-tools-throttle-scale.bmp)
 
-Converts between Spektrum-style `0-100%` throttle values and Ethos/EdgeTX-style
+Converts between Spektrum-style `0-100%` throttle values and Ethos-style
 `+/-100%` throttle values. Use the `Swap` button to flip the direction.
 
 Examples:
